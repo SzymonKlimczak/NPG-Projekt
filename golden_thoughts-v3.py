@@ -88,7 +88,7 @@ def inicjalizacjaPrzycisku(root,ekran,pole_na_dane):
             print('Wiadomość wysłana')
         except Exception as e:
             print(f'Błąd podczas wysyłania wiadomości: {str(e)}')
-
+        root.destroy()
     przycisk = tk.Button(root, text = "Wyślij", command=send_email)
     przycisk.grid(row = 2)
     return przycisk
