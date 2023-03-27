@@ -85,7 +85,7 @@ def inicjalizacjaPrzycisku(root,ekran,pole_na_dane):
             server.login(MY_ADDRESS, MY_PASSWORD)
             server.sendmail(MY_ADDRESS, TO_ADDRESS, msg.as_string())
             server.quit()
-            print('Wiadomość wysłana')
+            messagebox.showinfo("Potwierdzenie", "Adres e-mail został zapisany!")
         except Exception as e:
             print(f'Błąd podczas wysyłania wiadomości: {str(e)}')
         root.destroy()
