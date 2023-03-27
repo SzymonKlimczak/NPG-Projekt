@@ -1,20 +1,33 @@
 import smtplib
 import time
 import random
+import tkinter as tk
+from tkinter import messagebox
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# dane logowania do skrzynki pocztowej
 MY_ADDRESS = 'zlotemysliNPG@gmail.com'
 MY_PASSWORD = 'theaiualjmhmyfrn'
-
-# dane odbiorcy wiadomości
-adres = input("Podaj adres na który chcesz wysłać wiadomość: ")
-TO_ADDRESS = adres
-
-# konfiguracja serwera SMTP
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
+
+def inicjalizacjaOkienka():
+    root = tk.Tk()
+    root.geometry('480x480')
+    root.title('Złote myśli')
+    return root
+
+def inicjalizacjaEkranu(root):
+    ekran = tk.Label(root, bg="lightyellow",text="Wpisz adres e-mail, na który chcesz otrzymywać codzienną złotą myśl", width=55, borderwidth=2)
+    ekran.grid(row = 0, column = 0)
+    return ekran
+
+def inicjalizacjaPolaNaDane(root, ekran):
+    pole_na_dane = tk.Entry(root)
+    pole_na_dane.grid(row = 1, column = 0,ipadx = 50, ipady = 5)
+    info = tk.Label(root, text="", width=55, borderwidth=2)
+    info.grid(row=3, ipadx=15, ipady=1)
+    return pole_na_dane
 
 # dodanie plików z bazami danych
 filename1 = 'Bazy danych\Baza złotych myśli.txt'
@@ -48,16 +61,9 @@ def get_songs(filename):
       elif len(displayed_songs) >= len(songs):
           return 0
 
-# nieskończona pętla wysyłająca maila raz dziennie
-while True:
-    try:
-        # nawiązanie połączenia z serwerem SMTP
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.ehlo()
-        server.starttls()
-        server.login(MY_ADDRESS, MY_PASSWORD)
-
-        # treść wiadomości
+def inicjalizacjaPrzycisku(root,ekran,pole_na_dane):
+    def send_email():
+        TO_ADDRESS = pole_na_dane.get()
         msg = MIMEMultipart()
         msg['From'] = MY_ADDRESS
         msg['To'] = TO_ADDRESS
@@ -72,13 +78,27 @@ while True:
         msg.attach(MIMEText(message3))
         msg.attach(MIMEText(message4))
         msg.attach(MIMEText(message5))
+        try:
+            server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+            server.ehlo()
+            server.starttls()
+            server.login(MY_ADDRESS, MY_PASSWORD)
+            server.sendmail(MY_ADDRESS, TO_ADDRESS, msg.as_string())
+            server.quit()
+            print('Wiadomość wysłana')
+        except Exception as e:
+            print(f'Błąd podczas wysyłania wiadomości: {str(e)}')
 
-        # wysłanie wiadomości
-        server.sendmail(MY_ADDRESS, TO_ADDRESS, msg.as_string())
-        server.quit()
+    przycisk = tk.Button(root, text = "Wyślij", command=send_email)
+    przycisk.grid(row = 2)
+    return przycisk
 
-        print('Wiadomość wysłana')
-    except Exception as e:
-        print(f'Błąd podczas wysyłania wiadomości: {str(e)}')
-    # oczekiwanie na kolejny dzień
+if __name__ == '__main__':
+    root = inicjalizacjaOkienka()
+    ekran = inicjalizacjaEkranu(root)
+    pole_na_dane = inicjalizacjaPolaNaDane(root, ekran)
+    przycisk = inicjalizacjaPrzycisku(root, ekran, pole_na_dane)
+    root.mainloop()
+
+# oczekiwanie na kolejny dzień
     time.sleep(24 * 60 * 60)  # 24 godziny w sekundach
