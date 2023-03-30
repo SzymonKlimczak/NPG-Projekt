@@ -8,8 +8,8 @@ with open("Bazy Danych/email.txt", "r") as mails:
     mail_name = mails.read().strip()
 
 # dane logowania do skrzynki pocztowej
-MY_ADDRESS = 'zlotemysliNPG@gmail.com'
-MY_PASSWORD = 'txygorpadyuttaks'
+MY_ADDRESS = 'projektzlotemysliNPG@gmail.com'
+MY_PASSWORD = 'aonfojtxnxaidbbw'
 
 # dane odbiorcy wiadomości
 TO_ADDRESS = mail_name
