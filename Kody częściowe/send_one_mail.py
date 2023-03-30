@@ -6,8 +6,8 @@ from tkinter import messagebox
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-MY_ADDRESS = 'zlotemysliNPG@gmail.com'
-MY_PASSWORD = 'txygorpadyuttaks'
+MY_ADDRESS = 'projektzlotemysliNPG@gmail.com'
+MY_PASSWORD = 'aonfojtxnxaidbbw'
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 
