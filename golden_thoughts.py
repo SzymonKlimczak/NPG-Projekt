@@ -9,7 +9,7 @@ with open("Bazy Danych/email.txt", "r") as mails:
 
 # dane logowania do skrzynki pocztowej
 MY_ADDRESS = 'zlotemysliNPG@gmail.com'
-MY_PASSWORD = 'theaiualjmhmyfrn'
+MY_PASSWORD = 'txygorpadyuttaks'
 
 # dane odbiorcy wiadomości
 TO_ADDRESS = mail_name
