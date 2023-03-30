@@ -30,7 +30,7 @@ def inicjalizacjaPolaNaDane(root, ekran):
     return pole_na_dane
 
 # dodanie plików z bazami danych
-filename1 = 'Bazy danych\Baza złotych myśli.txt'
+filename1 = 'Bazy danych\Baza_złotych_myśli.txt'
 filename2 = 'Bazy danych\Piosenki.txt'
 quotes = []
 displayed_quotes = []
